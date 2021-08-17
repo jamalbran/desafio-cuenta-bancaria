@@ -1,12 +1,21 @@
-class Carta
-  attr_accessor :numero, :pinta
+class CuentaBancaria
+  def initialize(nombre_usuario, numero_cuenta, vip = 0)
+    raise RangeError, 'El numero de cuenta debe tener 8 digitos' if numero_cuenta.digits.count != 8
 
-  def initialize(numero, pinta)
-    raise ArgumentError, 'El numero no esta dentro del rango 1 - 13' if numero < 1 || numero > 13
+    @nombre_usuario = nombre_usuario
+    @numero_cuenta = numero_cuenta
+    @vip = vip
+  end
 
-    @numero = numero
-    raise ArgumentError, 'La pinta no es una correcta.' if ['C', 'D', 'E', 'T'].include?(pinta)
-
-    @pinta = pinta
+  def numero_de_cuenta
+    if @vip == 1
+      puts "1-#{@numero_cuenta}"
+    else
+      puts "0-#{@numero_cuenta}"
+    end
   end
 end
+
+u1 = CuentaBancaria.new('Usuario1', 12345678, 1)
+
+u1.numero_de_cuenta
